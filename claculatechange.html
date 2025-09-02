@@ -1,0 +1,57 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculate Change</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .container { max-width: 400px; margin: auto; }
+    .input-row { margin-bottom: 10px; }
+    #error { color: red; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Calculate Change</h2>
+    
+    <div class="input-row">
+      <label for="amount">Enter Amount:</label>
+      <input type="number" id="amount" placeholder="e.g. 874">
+      <button onclick="calculateChange()">Submit</button>
+    </div>
+
+    <p id="error"></p>
+    <div id="result"></div>
+
+    <br>
+    <button onclick="window.location.href='index.html'">⬅ Back</button>
+  </div>
+
+  <script>
+    function calculateChange() {
+      let amount = parseInt(document.getElementById("amount").value);
+      let error = document.getElementById("error");
+      let resultDiv = document.getElementById("result");
+      error.textContent = "";
+      resultDiv.innerHTML = "";
+
+      if (isNaN(amount) || amount <= 0) {
+        error.textContent = "Please enter a valid positive amount.";
+        return;
+      }
+
+      let denominations = [500, 100, 50, 20, 1];
+      let result = "";
+
+      for (let i = 0; i < denominations.length; i++) {
+        let count = Math.floor(amount / denominations[i]);
+        if (count > 0) {
+          result += `${count} of ฿${denominations[i]}<br>`;
+          amount %= denominations[i];
+        }
+      }
+      resultDiv.innerHTML = result;
+    }
+  </script>
+</body>
+</html>

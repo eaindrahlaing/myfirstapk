@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Temperature Converter</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    #error { color: red; }
+  </style>
+</head>
+<body>
+
+  <h2>Temperature Converter</h2>
+
+  <label for="tempInput">Enter Temperature:</label>
+  <input type="number" id="tempInput">
+
+  <select id="conversionType">
+    <option value="CtoF">Celsius to Fahrenheit</option>
+    <option value="FtoC">Fahrenheit to Celsius</option>
+  </select>
+
+  <button onclick="convertTemp()">Convert</button>
+
+  <p id="error"></p>
+  <p id="tempResult">Equal to ...</p>
+
+  <br>
+  <button onclick="window.location.href='index.html'">⬅ Back</button>
+
+  <script>
+    function convertTemp() {
+      let temp = document.getElementById("tempInput").value;
+      let type = document.getElementById("conversionType").value;
+      let error = document.getElementById("error");
+      let resultDisplay = document.getElementById("tempResult");
+      error.textContent = "";
+      resultDisplay.textContent = "Equal to ...";
+
+      if (temp === "" || isNaN(temp)) {
+        error.textContent = "Please enter a valid temperature.";
+        return;
+      }
+
+      let result;
+      if (type === "CtoF") {
+        result = (temp * 9 / 5) + 32;
+        resultDisplay.innerHTML = "Equal to " + result.toFixed(2) + "°F";
+      } else {
+        result = (temp - 32) * 5 / 9;
+        resultDisplay.innerHTML = "Equal to " + result.toFixed(2) + "°C";
+      }
+    }
+  </script>
+</body>
+</html>
